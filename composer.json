@@ -1,0 +1,22 @@
+{
+    "name": "contract/primitives",
+    "description": "Contract classes for rich domain primitives.",
+    "type": "library",
+    "require-dev": {
+        "phpunit/phpunit": "^12.4",
+        "fasano/phpunit-oop": "^1.0"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Contract\\Primitives\\": "src/",
+            "Contract\\Primitives\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Nicolas Fasano",
+            "email": "fasano.nm@gmail.com"
+        }
+    ]
+}
