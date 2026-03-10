@@ -1,6 +1,6 @@
 {
-    "name": "fasano/phpprimitives",
-    "description": "Abstractions for building rich domain primitives.",
+    "name": "fasano/phprimitives",
+    "description": "Tools for building rich domain primitives.",
     "type": "library",
     "version": "1.0.0",
     "license": "MIT",

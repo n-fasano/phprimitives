@@ -1,6 +1,10 @@
-# PHPrimitives
+<p align="center">
+    <img src="phprimitives.png" width="300" height="300"/>
+</p>
 
-Abstractions for building rich domain primitives in PHP.
+<p align="center">
+    <i>Tools for building rich domain primitives in PHP.</i>
+</p>
 
 ## Installation
 ```bash
@@ -19,14 +23,18 @@ Primitives enforce invariants at the edges of your application. Validate at boun
 # Input boundary - scalar to primitive
 $age = new Age($request->input('age'));           # Throws if invalid
 $email = new Email($request->input('email'));     # Throws if invalid
+```
 
+```php
 # Everywhere else - work with primitives
 function createUser(Email $email, Age $age): User
 {
     # Type system guarantees correctness
     # No defensive checks required
 }
+```
 
+```php
 # Output boundary - primitive to scalar
 $repository->save([
     'email' => $email->value,
@@ -40,7 +48,7 @@ $repository->save([
 function createUser(string $email, int $age): void
 {
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) { /* ... */ }
-    if ($age < 0 || $age > 150) { /* ... */ }
+    if ($age < 0 || 120 < $age) { /* ... */ }
     # Repeat in every function that touches these values
 }
 ```

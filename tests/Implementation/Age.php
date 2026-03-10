@@ -9,7 +9,7 @@ readonly class Age extends AbstractInteger
 {
     protected static function validate(int $value): void
     {
-        if ($value <= 0 || 120 <= $value) {
+        if ($value < 0 || 120 < $value) {
             throw new InvalidBackingValue($value, static::class);
         }
     }
