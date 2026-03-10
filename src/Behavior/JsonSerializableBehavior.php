@@ -4,8 +4,10 @@ namespace Fasano\PHPrimitives\Behavior;
 
 trait JsonSerializableBehavior
 {
-	public function jsonSerialize(): float
+    abstract public function deconstruct(): int|float|bool|string;
+
+	public function jsonSerialize(): int|float|bool|string
     {
-        return $this->value;
+        return $this->deconstruct();
     }
 }

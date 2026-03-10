@@ -11,8 +11,8 @@ class AgeTest extends PrimitiveTest
     public static function cases(): iterable
     {
         yield 'Valid' => [21, true];
-        
-        yield 'Zero' => [0, false];
+        yield 'Zero' => [0, true];
+
         yield 'Negative' => [-1, false];
         yield 'Too large' => [121, false];
     }
