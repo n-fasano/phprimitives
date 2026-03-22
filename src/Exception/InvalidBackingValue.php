@@ -3,12 +3,14 @@
 namespace Fasano\PHPrimitives\Exception;
 
 use InvalidArgumentException;
+use ReflectionClass;
 
 class InvalidBackingValue extends InvalidArgumentException
 {
     public function __construct(mixed $value, string $type, string $reason = '')
     {
         $valueType = \gettype($value);
+        $type = strtolower((new ReflectionClass($type))->getShortName());
 
         $message = \sprintf(
             'Invalid backing value for "%s": (%s) %s',
