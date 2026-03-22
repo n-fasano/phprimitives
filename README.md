@@ -11,11 +11,12 @@
 composer require fasano/phprimitives
 ```
 
-### What is a Primitive?
+## What is this?
 
-Primitive objects wrap scalar values with domain-specific validation and type safety.
+PHP has no base class for scalars - so there's nowhere to hook validation, enforce invariants,
+or express domain meaning. PHPrimitives fills that gap.
 
-**The Pattern:**
+## How to use them?
 
 Primitives enforce invariants at the edges of your application. Validate at boundaries, trust everywhere else. Primitives convert to/from scalars at your application edges:
 
@@ -59,8 +60,28 @@ function createUser(string $email, int $age): void
 - **Type safety through nominal typing** — Can't pass `Age` where `Temperature` is expected, even though both wrap integers
 - **Domain concepts expressed clearly** — `Email` is more meaningful than `string`
 
-### Examples
+## Serialization
+
+Primitives implement `JsonSerializable` out of the box:
+```php
+echo json_encode(new Person(
+    new Name('John'),
+    new Age(18),
+    new Email('john@example.com'),
+));
+// {"name":"John","age":18,"email":"john@example.com"}
+```
+
+## Examples
 
 - [Age (Integer)](/tests/Implementation/Age.php)
 - [Email (String)](/tests/Implementation/Email.php)
 - [Status (Enum)](/tests/Implementation/Status.php)
+
+## Ecosystem
+
+| Package | Description |
+|---------|-------------|
+| [phprimitives-example](https://github.com/n-fasano/phprimitives-example) | An in-context example usage of PHPrimitives |
+| [phprimitives-doctrine](https://github.com/n-fasano/phprimitives-doctrine) | Doctrine DBAL type mappings |
+| [phprimitives-symfony](https://github.com/n-fasano/phprimitives-symfony) | Symfony Serializer integration |
