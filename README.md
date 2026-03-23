@@ -14,9 +14,30 @@ composer require fasano/phprimitives
 ## What is this?
 
 PHP has no base class for scalars - so there's nowhere to hook validation, enforce invariants,
-or express domain meaning. PHPrimitives fills that gap.
+or express domain meaning. PHPrimitives fills that gap with 4 base classes:
+
+- [AbstractString](/src/AbstractString.php)
+- [AbstractInteger](/src/AbstractInteger.php)
+- [AbstractFloat](/src/AbstractFloat.php)
+- [AbstractBoolean](/src/AbstractBoolean.php)
 
 ## How to use them?
+
+Simply extend the base classes, and implement the `validate` method. Throw an `InvalidArgumentException` if the value is invalid.
+
+```php
+readonly class Email extends AbstractString
+{
+    protected static function validate(string $value): void
+    {
+        if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
+            throw new InvalidArgumentException('Invalid email address: ' . $value);
+        }
+    }
+}
+```
+
+## Why use them?
 
 Primitives enforce invariants at the edges of your application. Validate at boundaries, trust everywhere else. Primitives convert to/from scalars at your application edges:
 
@@ -72,16 +93,12 @@ echo json_encode(new Person(
 // {"name":"John","age":18,"email":"john@example.com"}
 ```
 
-## Examples
-
-- [Age (Integer)](/tests/Implementation/Age.php)
-- [Email (String)](/tests/Implementation/Email.php)
-- [Status (Enum)](/tests/Implementation/Status.php)
-
 ## Ecosystem
+
+The wrapping and unwrapping of values into primitive objects can be automated fairly trivially. You can find very simple libs to do so in Symfony and Doctrine below, along with a full example project that uses **no scalars anywhere**.
 
 | Package | Description |
 |---------|-------------|
-| [phprimitives-example](https://github.com/n-fasano/phprimitives-example) | An in-context example usage of PHPrimitives |
 | [phprimitives-doctrine](https://github.com/n-fasano/phprimitives-doctrine) | Doctrine DBAL type mappings |
 | [phprimitives-symfony](https://github.com/n-fasano/phprimitives-symfony) | Symfony Serializer integration |
+| [phprimitives-example](https://github.com/n-fasano/phprimitives-example) | An in-context example usage of PHPrimitives |
